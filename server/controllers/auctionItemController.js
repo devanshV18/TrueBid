@@ -4,6 +4,7 @@ import { User } from "../models/userSchema.js";
 import ErrorHandler from "../middlewares/error.js";
 import {v2 as cloudinary} from "cloudinary"
 
+//adding an auction item function for auctioneer users
 export const addNewAuctionItem = catchAsyncErrors(async(req,res,next) => {
     if (!req.files || Object.keys(req.files).length === 0) {
         return next(new ErrorHandler("Auction Item Image Required", 400));
@@ -81,3 +82,32 @@ export const addNewAuctionItem = catchAsyncErrors(async(req,res,next) => {
             return next(new ErrorHandler(error.message || "Failed to create Auction! Try Again", 500))
         }
     })
+
+//
+export const getAllItems = catchAsyncErrors( async(req,res,next) => {
+
+})
+
+
+//
+export const getMyaAuctionItems = catchAsyncErrors( async(req,res,next) => {
+
+})
+
+
+//
+export const getMyaAuctionDetails = catchAsyncErrors( async(req,res,next) => {
+    
+})
+
+
+// 
+export const removeFromAuctions = catchAsyncErrors( async(req,res,next) => {
+    
+})
+
+
+//
+export const republishItem = catchAsyncErrors( async(req,res,next) => {
+    
+})
