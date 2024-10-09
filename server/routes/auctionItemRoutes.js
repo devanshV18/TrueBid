@@ -1,4 +1,4 @@
-import { addNewAuctionItem, getAllItems, getMyaAuctionDetails, removeFromAuctions, republishItem } from "../controllers/auctionItemController.js";
+import { addNewAuctionItem, getAllItems, getAuctionDetails, removeFromAuctions, republishItem, getMyAuctionItems } from "../controllers/auctionItemController.js";
 import { isAuthenticated, isAuthorized } from "../middlewares/auth.js";
 import express from "express";
 
@@ -6,13 +6,15 @@ const router = express.Router()
 
 router.post("/create",isAuthenticated, isAuthorized("Auctioneer"), addNewAuctionItem)
 
-router.get("/allItems", getAllItems)
+router.get("/allitems", getAllItems)
 
-router.get("/auction/:id", isAuthenticated, getMyaAuctionDetails)
+router.get("/auction/:id", isAuthenticated, getAuctionDetails)
 
-router.delete("/delete/:id", isAuthenticated, isAuthorized, removeFromAuctions)
+router.get("/myitems", isAuthenticated, isAuthorized("Auctioneer"), getMyAuctionItems)
 
-router.put("/item/republish/:id", isAuthenticated, isAuthorized, republishItem)
+router.delete("/delete/:id", isAuthenticated, isAuthorized("Auctioneer"), removeFromAuctions)
+
+router.put("/item/republish/:id", isAuthenticated, isAuthorized("Auctioneer"), republishItem)
 
 
 export default router

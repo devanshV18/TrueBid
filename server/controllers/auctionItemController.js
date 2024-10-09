@@ -3,6 +3,7 @@ import { Auction } from "../models/auctionSchema.js";
 import { User } from "../models/userSchema.js";
 import ErrorHandler from "../middlewares/error.js";
 import {v2 as cloudinary} from "cloudinary"
+import mongoose from "mongoose";
 
 //adding an auction item function for auctioneer users
 export const addNewAuctionItem = catchAsyncErrors(async(req,res,next) => {
@@ -83,21 +84,45 @@ export const addNewAuctionItem = catchAsyncErrors(async(req,res,next) => {
         }
     })
 
-//
+//getting all auction Items to list on the web site
 export const getAllItems = catchAsyncErrors( async(req,res,next) => {
-
+    let items = await Auction.find() // all docs under Auction Model
+    res.status(200).json({
+        success: true,
+        items
+    })
 })
 
 
-//
-export const getMyaAuctionItems = catchAsyncErrors( async(req,res,next) => {
+//fetching auction details of a certain auctions using its id, we also get a sorted array of bidders in desc order.
+export const getAuctionDetails = catchAsyncErrors( async(req,res,next) => {
 
+    const {id} = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return next(new ErrorHandler("Invalid Id Format", 400))
+    }
+    const auctionItem = await Auction.findById(id)
+    if(!auctionItem){
+        return next(new ErrorHandler("Auction item requested does not exist.", 404))
+    }
+
+    const bidders = auctionItem.bids.sort((a,b) => b.bid - a.bid)
+    res.status(200).json({
+        success: true,
+        auctionItem,
+        bidders
+    })
 })
 
 
-//
-export const getMyaAuctionDetails = catchAsyncErrors( async(req,res,next) => {
-    
+//fetching auctions posted by a particular user who is an auctioneer -> req.user._id comes from the middle ware isAuthenticated 
+export const getMyAuctionItems = catchAsyncErrors( async(req,res,next) => {
+    const userAuctionItems = await Auction.find({createdBy: req.user._id})
+    res.status(200).json({
+        success: true,
+        userAuctionItems
+    })
 })
 
 
