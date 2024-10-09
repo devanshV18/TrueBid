@@ -80,4 +80,4 @@ export const addNewAuctionItem = catchAsyncErrors(async(req,res,next) => {
         } catch (error) {   
             return next(new ErrorHandler(error.message || "Failed to create Auction! Try Again", 500))
         }
-})
+    })
