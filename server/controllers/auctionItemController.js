@@ -126,13 +126,74 @@ export const getMyAuctionItems = catchAsyncErrors( async(req,res,next) => {
 })
 
 
-// 
+// delete a given auction item using its id
 export const removeFromAuctions = catchAsyncErrors( async(req,res,next) => {
-    
+    const {id} = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return next(new ErrorHandler("Invalid Id Format", 400))
+    }
+    const auctionItem = await Auction.findById(id)
+    if(!auctionItem){
+        return next(new ErrorHandler("Auction item requested does not exist.", 404))
+    }
+
+    await auctionItem.deleteOne()
+    res.status(200).json({
+        success: true,
+        message: "Auction item deleted successfully"
+    })
 })
 
 
-//
+//Republishing an existing auction item using its id
 export const republishItem = catchAsyncErrors( async(req,res,next) => {
-    
+    const {id} = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return next(new ErrorHandler("Invalid Id Format", 400))
+    }
+    let auctionItem = await Auction.findById(id)
+    if(!auctionItem){
+        return next(new ErrorHandler("Auction item requested does not exist.", 404))
+    }
+    if(new Date(auctionItem.endTime) > Date.now()){
+        return next(new ErrorHandler("Auction is already active, cannot Republish", 400))
+    }
+    let data = {
+        startTime: new Date(req.body.startTime),
+        endTime: new Date(req.body.endTime)
+    }
+    if(data.startTime < Date.now()){
+        return next(new ErrorHandler("Auction startTime must be after the current time", 400))
+    }
+
+    if(data.startTime >= data.endTime){
+        return next(new ErrorHandler("Auction startTime must be before the end time", 400))
+    }
+    data.bids = []
+    data.commissionCalculated = false
+
+    if( !req.body.startTime || !req.body.endTime){
+        return next(new ErrorHandler("Start and End time is amndatory for republishing an item", 400))
+    }
+
+    auctionItem = await Auction.findByIdAndUpdate(id, data, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+
+    const createdBy = await User.findByIdAndUpdate(req.user._id, {unpaidCommision: 0}, {
+        new: true,
+        runValidators: false,
+        useFindAndModify: false
+    })
+
+    res.status(200).json({
+        success: "true",
+        auctionItem,
+        message: `Auction republished successfuly and start at ${req.body.startTime}`,
+        createdBy
+    })
 })
