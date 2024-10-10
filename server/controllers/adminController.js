@@ -67,7 +67,8 @@ export const updateProofStatus = catchAsyncErrors(async(req,res,next) => {
     })
     res.status(200).json({
         success: true,
-        message: "Payment proof amount and status updated"
+        message: "Payment proof amount and status updated",
+        proof
     })
 })
 

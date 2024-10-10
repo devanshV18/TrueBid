@@ -69,6 +69,6 @@ import { v2 as cloudinary } from "cloudinary";
       success: true,
       message:
         "Your proof has been submitted successfully. We will review it and responed to you within 24 hours.",
-      commissionProof,
+        commissionProof,
     });
   });
