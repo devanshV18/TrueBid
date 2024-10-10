@@ -3,7 +3,7 @@ import { PaymentProof } from "../models/commissionProofSchema.js";
 import ErrorHandler from "../middlewares/error.js";
 import { User } from "../models/userSchema.js";
 import { v2 as cloudinary } from "cloudinary";
-import { Auction } from "../models/auctionSchema.js";
+// import { Auction } from "../models/auctionSchema.js";
 
 
 
