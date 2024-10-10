@@ -9,7 +9,7 @@ import userRouter from "./routes/userRoutes.js";
 import auctionItemRouter from "./routes/auctionItemRoutes.js"
 import bidRouter from "./routes/bidRoutes.js"
 import commissionRouter from "./routes/commissionRouter.js"
-
+import adminRouter from "./routes/adminRoutes.js"
 
 const app = express();
 config({
@@ -36,6 +36,7 @@ app.use("/api/users", userRouter)
 app.use("/api/auctionitem", auctionItemRouter)
 app.use("/api/bids", bidRouter )
 app.use("/api/commission", commissionRouter)
+app.use("/api/admin", adminRouter)
 
 
 connectDB();

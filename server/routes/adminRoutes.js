@@ -1,6 +1,6 @@
 import express from "express"
-import { isAuthenticated, isAuthorized } from "../middlewares/auth"
-import { deletePaymentProof, getPaymentProofs, updateProofStatus, deleteAuctionItem, paymentProofDetails } from "../controllers/adminController"
+import { isAuthenticated, isAuthorized } from "../middlewares/auth.js"
+import { deletePaymentProof, getPaymentProofs, updateProofStatus, deleteAuctionItem, paymentProofDetails } from "../controllers/adminController.js"
 
 const router = express.Router()
 
