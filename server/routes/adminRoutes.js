@@ -1,6 +1,6 @@
 import express from "express"
 import { isAuthenticated, isAuthorized } from "../middlewares/auth.js"
-import { deletePaymentProof, getPaymentProofs, updateProofStatus, deleteAuctionItem, paymentProofDetails, fetchAllUsers } from "../controllers/adminController.js"
+import { deletePaymentProof, getPaymentProofs, updateProofStatus, deleteAuctionItem, paymentProofDetails, fetchAllUsers,totalMonthlyRevenue } from "../controllers/adminController.js"
 
 const router = express.Router()
 
@@ -10,6 +10,7 @@ router.get("/paymentproof/:id", isAuthenticated, isAuthorized("Admin"), paymentP
 router.put("/paymentproof/status/update/:id", isAuthenticated, isAuthorized("Admin"), updateProofStatus)
 router.delete("/paymentproof/delete/:id", isAuthenticated, isAuthorized("Admin"), deletePaymentProof)
 router.get("/users/getall", isAuthenticated, isAuthorized("Admin"), fetchAllUsers)
+router.get("/monthlyincome", isAuthenticated, isAuthorized("Admin"), totalMonthlyRevenue)
 
 
 export default router

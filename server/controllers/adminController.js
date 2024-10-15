@@ -138,3 +138,40 @@ export const fetchAllUsers = catchAsyncErrors(async(req,res,next) => {
         auctioneersArray
     })
 })
+
+
+//controller to determine monthly revenue
+export const totalMonthlyRevenue = catchAsyncErrors( async(req,res,next) => {
+    const payments = await commission.aggregate([
+        {
+            $group: {
+                _id: {
+                    month: {$month: "$createdAt"},
+                    year: {$year: "$createdAt"}
+                },
+                totalAmount: { $sum: "$amount"},
+            },
+        },
+        {
+            $sort: {"_id.year":1, "_id.month": 1},
+        },
+    ])
+
+    const transformDataToMonthlyArray = (payments, totalMonths = 12) => {
+        const result = Array(totalMonths).fill(0)
+
+        payments.forEach((payment) => {
+            result[payment._id.month - 1] = payment.totalAmount
+        })
+
+        return result
+    }
+
+    const totalMonthlyRevenue = transformDataToMonthlyArray(payments)
+
+    res.status(200).json({
+        success: true,
+        totalMonthlyRevenue,
+    })
+
+})
