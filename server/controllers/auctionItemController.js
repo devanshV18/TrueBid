@@ -4,6 +4,7 @@ import { User } from "../models/userSchema.js";
 import ErrorHandler from "../middlewares/error.js";
 import {v2 as cloudinary} from "cloudinary"
 import mongoose from "mongoose";
+import { Bid } from "../models/bidSchema.js"
 
 //adding an auction item function for auctioneer users
 export const addNewAuctionItem = catchAsyncErrors(async(req,res,next) => {
@@ -171,18 +172,32 @@ export const republishItem = catchAsyncErrors( async(req,res,next) => {
     if(data.startTime >= data.endTime){
         return next(new ErrorHandler("Auction startTime must be before the end time", 400))
     }
+
+    if(auctionItem.highestBidder){
+        const highestBidder = await User.findById(auctionItem.highestBidder)
+
+        highestBidder.moneySpent -= auctionItem.currentBid
+        highestBidder.auctionsWon -= 1
+        highestBidder.save()
+    }
+
+
     data.bids = []
     data.commissionCalculated = false
+    data.currentBid = 0
+    data.highestBidder = null
 
-    if( !req.body.startTime || !req.body.endTime){
-        return next(new ErrorHandler("Start and End time is amndatory for republishing an item", 400))
-    }
+    // if( !req.body.startTime || !req.body.endTime){
+    //     return next(new ErrorHandler("Start and End time is amndatory for republishing an item", 400))
+    // }
 
     auctionItem = await Auction.findByIdAndUpdate(id, data, {
         new: true,
         runValidators: true,
         useFindAndModify: false
     })
+
+    await Bid.deleteMany( {auctionItem: auctionItem._id} )
 
     const createdBy = await User.findByIdAndUpdate(req.user._id, {unpaidCommision: 0}, {
         new: true,
