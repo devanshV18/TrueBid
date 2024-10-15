@@ -10,6 +10,8 @@ import auctionItemRouter from "./routes/auctionItemRoutes.js"
 import bidRouter from "./routes/bidRoutes.js"
 import commissionRouter from "./routes/commissionRouter.js"
 import adminRouter from "./routes/adminRoutes.js"
+import { endedAuctionCron } from "./automation/endedAuctionCron.js";
+
 
 const app = express();
 config({
@@ -37,7 +39,7 @@ app.use("/api/auctionitem", auctionItemRouter)
 app.use("/api/bids", bidRouter )
 app.use("/api/commission", commissionRouter)
 app.use("/api/admin", adminRouter)
-
+endedAuctionCron()
 
 connectDB();
 
