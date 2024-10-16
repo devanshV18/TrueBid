@@ -4,7 +4,7 @@ import ErrorHandler from "../middlewares/error.js";
 import { User } from "../models/userSchema.js";
 import { v2 as cloudinary } from "cloudinary";
 import { Auction } from "../models/auctionSchema.js";
-
+import mongoose from "mongoose"
 export const calculateCommission = async (auctionId) => {
   const auction = await Auction.findById(auctionId)
   if(!mongoose.Types.ObjectId.isValid(auctionId)){

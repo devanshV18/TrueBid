@@ -11,7 +11,7 @@ import bidRouter from "./routes/bidRoutes.js"
 import commissionRouter from "./routes/commissionRouter.js"
 import adminRouter from "./routes/adminRoutes.js"
 import { endedAuctionCron } from "./automation/endedAuctionCron.js";
-
+import { verifyCommissioCron } from "./automation/verifyCommissionCron.js"
 
 const app = express();
 config({
@@ -40,7 +40,7 @@ app.use("/api/bids", bidRouter )
 app.use("/api/commission", commissionRouter)
 app.use("/api/admin", adminRouter)
 endedAuctionCron()
-
+verifyCommissioCron()
 connectDB();
 
 app.use(errorMiddleware)

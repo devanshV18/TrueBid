@@ -10,7 +10,7 @@ export const endedAuctionCron = () => {
 
     cron.schedule("*/1 * * * *", async() => {
         const now = new Date()
-        console.log("Cron for ended auction running")
+        // console.log("Cron for ended auction running")
 
         //fetching the ended auctions -> auctions that have end time before date.now and its commission is not yeat calculated -> false
         const endedAuctions = await Auction.find({

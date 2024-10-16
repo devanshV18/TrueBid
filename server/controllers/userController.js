@@ -63,6 +63,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
                     bankAccountNumber,
                     AccountHandlerName,
                     ifscCode,
+                    bankName
                 },
                 upi: {
                     upiId,
