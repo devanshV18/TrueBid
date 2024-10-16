@@ -6,13 +6,13 @@ import { sendEmail } from "../utils/sendEmail.js"
 
 export const verifyCommissioCron = () => {
     cron.schedule("*/1 * * * *", async() => {
-        // console.log("Running Verify Commission Cron ... ")
+        console.log("Running Verify Commission Cron ... ")
         
         const approvedProofs = await PaymentProof.find({status: "Approved"})
 
         for(const proof of approvedProofs){
             try {
-                const user = awaitUser.findById(proof.userId)
+                const user = await User.findById(proof.userId)
                 let updatedUserData = {}
                 if(user){
                     if(user.unpaidCommision >= proof.amount){
@@ -51,7 +51,7 @@ export const verifyCommissioCron = () => {
                     .substring(0,15)
 
                     const subject = `Your Payment has been successfully verified and settled`
-                    const message = `Dear ${user.userName},\n\nWe are pleased to inform you that your recent payment has been successfully verified and settled. Thank you for promptly providing the necessary proof of payment. Your account has been updated, and you can now proceed with your activities on our platform without any restrictions.\n\nPayment Details:\nAmount Settled: ${proof.amount}\nUnpaid Amount: ${updatedUserData.unpaidCommision}\nDate of Settlement: ${settlementDate}\n\nBest regards,\TrueBid Auctions, India`;
+                    const message = `Dear ${user.userName},\n\nWe are pleased to inform you that your recent payment has been successfully verified and settled. Thank you for promptly providing the necessary proof of payment. Your account has been updated, and you can now proceed with your activities on our platform without any restrictions.\n\nPayment Details:\nAmount Settled: ${proof.amount}\nUnpaid Amount: ${updatedUserData.unpaidCommision}\nDate of Settlement: ${settlementDate}\n\nBest regards,\ TrueBid Auctions, India`;
                     sendEmail( { emailTo: user.email, subject: subject, message: message } )
                 }
                 console.log(`User ${proof.userId} paid a commission of ${proof.amount}`)

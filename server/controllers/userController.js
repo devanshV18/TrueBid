@@ -24,7 +24,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
         }
 
         if (role === "Auctioneer") {
-            if (!bankAccountNumber || !AccountHandlerName || !bankName) {
+            if (!bankAccountNumber || !AccountHandlerName || !bankName || !ifscCode) {
                 return next(new ErrorHandler("Please provide necessary bank details", 400));
             }
             if (!upiId) {

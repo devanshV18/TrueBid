@@ -57,7 +57,7 @@ export const endedAuctionCron = () => {
             auctioneer._id,
             {
               $inc: {
-                unpaidCommission: commissionAmount,
+                unpaidCommision: commissionAmount,
               },
             },
             { new: true }
