@@ -73,3 +73,21 @@
     width: 100%;
   }
 }
+
+.hover-container {
+  display: flex;
+  justify-content: center;
+}
+
+.hover-effect {
+  padding: 10px 20px;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  border-radius: 8px;
+}
+
+.hover-effect:hover {
+  background-color: rgba(255, 255, 255, 0.8); /* Crystal white */
+  color: black;
+  transform: translateY(-5px); /* Hover effect - slightly move up */
+}
+
