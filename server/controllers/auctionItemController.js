@@ -187,9 +187,9 @@ export const republishItem = catchAsyncErrors( async(req,res,next) => {
     data.currentBid = 0
     data.highestBidder = null
 
-    // if( !req.body.startTime || !req.body.endTime){
-    //     return next(new ErrorHandler("Start and End time is amndatory for republishing an item", 400))
-    // }
+    if( !req.body.startTime || !req.body.endTime){
+        return next(new ErrorHandler("Start and End time is amndatory for republishing an item", 400))
+    }
 
     auctionItem = await Auction.findByIdAndUpdate(id, data, {
         new: true,

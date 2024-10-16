@@ -41,6 +41,7 @@ app.use("/api/commission", commissionRouter)
 app.use("/api/admin", adminRouter)
 endedAuctionCron()
 verifyCommissioCron()
+
 connectDB();
 
 app.use(errorMiddleware)
