@@ -13,6 +13,9 @@ import { FaFileInvoiceDollar } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom"
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+
 
 const SideDrawer = () => {
 
@@ -135,11 +138,12 @@ return (
 
                     (
                     <>
-                        <div className='my-4 flex justify-center gap-4 w-fit' onClick={handleLogout}> 
+                        <div className='my-4 flex justify-center gap-4 w-full' onClick={handleLogout}> 
                             <button className='bg-[#72a24d] text-white text-xl font-bold hover:bg-white hover:text-black rounded px-4 py-2 transition-colors duration-300'>
                             LogOut
                             </button>
                         </div>
+
                     </>
                     )   
                 }
@@ -179,13 +183,13 @@ return (
 
         <div>
             <div className='flex gap-2 items-center mb-2'>
-                <Link to={"/"} className='bg-[#2c2c2c] text-stone-500 p-2 text-xl rounded-sm hover:text-blue-400'>
-                    <FaFacebook/>
-                </Link>
+                <a href='https://github.com/devanshV18' className='bg-[#2c2c2c] text-stone-500 p-2 text-xl rounded-sm hover:text-blue-400'>
+                    <FaGithub />
+                </a>
 
-                <Link to={"/"} className='bg-[#2c2c2c] text-stone-500 p-2 text-xl rounded-sm hover:text-pink-500'>
+                <a href='https://www.instagram.com/verma_ji_7/profilecard/?igsh=amF5NWRvZ204YmFx' className='bg-[#2c2c2c] text-stone-500 p-2 text-xl rounded-sm hover:text-pink-500'>
                     <RiInstagramFill/>
-                </Link>
+                </a>
             </div>
 
                 <Link to={"/contact"} className='text-white text-xl font-semibold hover:text-[#72a24d]'>
@@ -193,7 +197,7 @@ return (
                 </Link>
 
                 <p className='text-white mb-4'>&copy; TrueBid, LLC.</p>
-                <p className='text-gray-400'>Designed By <Link to={"/"} className='text-white'>Devansh Verma</Link> </p>
+                <p className='text-gray-400'>Designed By <span className='text-white'>Devansh Verma</span><a href='https://www.linkedin.com/in/devansh-verma-822a20166/' className='text-white text-xl hover:text-blue-500'><FaLinkedin /></a> </p>
         </div>
 
 
