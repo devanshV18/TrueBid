@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom"
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
+import { logout } from '@/store/slices/userSlice';
 
 
 const SideDrawer = () => {
@@ -38,7 +39,7 @@ return (
         <GiHamburgerMenu />
     </div>
 
-    <div className={`w-[100%] sm:w-[300px] bg-[#2c2c2c] h-full fixed top-0 ${show ? "left-0" : "left-[-100%]"} transition-all duration-100 p-4 flex flex-col justify-between lg:left-0 border-r-[1px] border-r-stone-500`}>
+    <div className={`w-[100%] sm:w-[300px] bg-black h-full fixed top-0 ${show ? "left-0" : "left-[-100%]"} transition-all duration-100 p-4 flex flex-col justify-between lg:left-0 border-r-[1px] border-r-stone-500`}>
 
         <div className='relative'>
             <Link to={"/"}>
@@ -124,7 +125,7 @@ return (
                     (
                     <>
                         <div className='my-4 flex justify-center gap-2'> {/* Added justify-center here */}
-                            <Link to={"/signup"} className='flex justify-center items-center bg-[#72a24d] text-white text-xl font-bold hover:bg-white hover:text-black rounded px-4 py-2 transition-colors duration-300'>
+                            <Link to={"/sign-up"} className='flex justify-center items-center bg-[#72a24d] text-white text-xl font-bold hover:bg-white hover:text-black rounded px-4 py-2 transition-colors duration-300'>
                             SignUp
                             </Link>
                             <Link to={"/login"} className='flex justify-center items-center bg-[#72a24d] text-white text-xl font-bold hover:bg-white hover:text-black rounded px-4 py-2 transition-colors duration-300'>
@@ -140,7 +141,7 @@ return (
                     <>
                         <div className='my-4 flex justify-center gap-4 w-full' onClick={handleLogout}> 
                             <button className='bg-[#72a24d] text-white text-xl font-bold hover:bg-white hover:text-black rounded px-4 py-2 transition-colors duration-300'>
-                            LogOut
+                            Logout
                             </button>
                         </div>
 
