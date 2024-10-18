@@ -2,9 +2,10 @@ import { elements } from 'chart.js';
 import React from 'react'
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import FeaturedAuctions from "./home-sub-components/FeaturedAuctions";
-// import UpcomingAuctions from "./home-sub-components/UpcomingAuctions";
-// import Leaderboard from "./home-sub-components/Leaderboard";
+import FeaturedAuctions from "./home-sub-components/FeaturedAuctions";
+import UpcomingAuctions from "./home-sub-components/UpcomingAuctions";
+import Leaderboard from "./home-sub-components/Leaderboard";
+import Spinner from '@/custom-components/Spinner';
 // import Spinner from "@/custom-components/Spinner";
 
 const Home = () => {
@@ -34,7 +35,7 @@ const Home = () => {
             <h1
               className={`text-[#111] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
             >
-              Bidding Made Easy
+              Bidding Made Easy.
             </h1>
             <h1
               className={`text-[#72a24d] text-2xl font-bold mb-2 min-[480px]:text-2xl md:text-4xl xl:text-5xl 2xl:text-6xl`}
@@ -66,7 +67,9 @@ const Home = () => {
         </div>
 
         <div className='flex flex-col gap-6'>
-            <h3 className='text-black font-semibold md:text-3xl text-2xl'>How it works</h3>
+
+            <h2 className='text-black font-semibold md:text-3xl text-xl'>How it works</h2>
+
             <div className='flex flex-col gap-4 md:flex-row md:flex-wrap w-full'>
                 {
                   howItWorks.map(element => {
@@ -82,6 +85,10 @@ const Home = () => {
                 }
             </div>
         </div>
+        <FeaturedAuctions/>
+        <UpcomingAuctions/>
+        <Leaderboard/>
+        {/* <Spinner/> */}
       </section>
     </>
   )
