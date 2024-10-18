@@ -3,6 +3,7 @@ import axios from "axios"
 import { toast } from "react-toastify";
 
 const userSlice = createSlice({
+
     name: "user",
     initialState: {
         loading: false,
@@ -11,17 +12,21 @@ const userSlice = createSlice({
         leaderboard: [],
         error: null
     },
+
     reducers: {
+
         registerRequest(state,action){
             state.loading = true;
             state.isAuthenticated = false,
             state.user = {}
         },
+
         registerSuccess(state,action){
             state.loading = false;
             state.isAuthenticated = true,
             state.user = action.payload.user
         },
+
         registerFailed(state,action){
             state.loading = false;
             state.isAuthenticated = false,
@@ -32,25 +37,30 @@ const userSlice = createSlice({
             state.isAuthenticated = false,
             state.user = {}
         },
+
         loginSuccess(state,action){
             state.loading = false;
             state.isAuthenticated = true,
             state.user = action.payload.user
         },
+
         loginFailed(state,action){
             state.loading = false;
             state.isAuthenticated = false,
             state.user = {}
         },
+
         logoutSuccess(state, action){
             state.isAuthenticated = false
             state.user = {}
         },
+
         logoutFailed(state, action){
             state.loading = false
             state.isAuthenticated = state.isAuthenticated
             state.user = state.user
         },
+
         clearAllErrors(state,action){
             state.user = state.user
             state.isAuthenticated = state.isAuthenticated
@@ -59,6 +69,9 @@ const userSlice = createSlice({
         }
     }
 })
+
+
+
 
 export const register = (data) => async (dispatch) => {
     dispatch(userSlice.actions.registerRequest())
@@ -86,6 +99,10 @@ export const register = (data) => async (dispatch) => {
     }
 }
 
+
+
+
+
 export const login = (data) => async (dispatch) => {
     dispatch(userSlice.actions.loginRequest())
     try {
@@ -112,6 +129,10 @@ export const login = (data) => async (dispatch) => {
     }
 }
 
+
+
+
+
 export const logout = () => async(dispatch) => {
     try {
         const response = await axios.get("http://localhost:5000/api/users/logout", { withCredentials: true} )
@@ -124,5 +145,8 @@ export const logout = () => async(dispatch) => {
         dispatch(userSlice.actions.clearAllErrors)
     }
 }
+
+
+
 
 export default userSlice.reducer
