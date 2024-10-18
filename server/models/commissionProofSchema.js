@@ -25,10 +25,8 @@ const paymentProofSchema = new mongoose.Schema({
         default: "Pending",
         enum: ["Pending", "Approved", "Rejected", "Settled"]
     },
-    amount : {
-        type: Number,
-        comment: String
-    }
+    amount: Number,
+    comment: String
 })
 
 export const PaymentProof = mongoose.model("Payment", paymentProofSchema)
