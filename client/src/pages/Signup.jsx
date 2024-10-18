@@ -39,9 +39,9 @@ const Signup = () => {
     role === "Auctioneer" && 
     (
         formData.append("bankAccountNumber", bankAccountNumber),
-        formData.append("accountHandlerName", accountHandlerName),
+        formData.append("AccountHandlerName", accountHandlerName),
         formData.append("ifscCode", ifscCode),
-        formData.append("bankname", bankName),
+        formData.append("bankName", bankName),
         formData.append("upiId", upiId)
     )
 
