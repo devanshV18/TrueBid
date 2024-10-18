@@ -7,8 +7,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import Signup from './pages/Signup'; 
 import Login from './pages/login';
 import SubmitCommission from './pages/SubmitCommission';
+import { useDispatch } from 'react-redux';
+import { fetchUser } from './store/slices/userSlice';
+import { useEffect } from 'react';
 
 const App = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchUser())
+  }, []);
+
   return (
     <Router>
       <SideDrawer/>

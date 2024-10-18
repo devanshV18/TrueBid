@@ -50,6 +50,24 @@ const userSlice = createSlice({
             state.user = {}
         },
 
+        fetchUserRequest(state,action){
+            state.loading = true;
+            state.isAuthenticated = false,
+            state.user = {}
+        },
+
+        fetchUserSuccess(state,action){
+            state.loading = false;
+            state.isAuthenticated = true,
+            state.user = action.payload
+        },
+
+        fetchUserFailed(state,action){
+            state.loading = false;
+            state.isAuthenticated = false,
+            state.user = {}
+        },
+
         logoutSuccess(state, action){
             state.isAuthenticated = false
             state.user = {}
@@ -101,8 +119,6 @@ export const register = (data) => async (dispatch) => {
 
 
 
-
-
 export const login = (data) => async (dispatch) => {
     dispatch(userSlice.actions.loginRequest())
     try {
@@ -131,8 +147,6 @@ export const login = (data) => async (dispatch) => {
 
 
 
-
-
 export const logout = () => async(dispatch) => {
     try {
         const response = await axios.get("http://localhost:5000/api/users/logout", { withCredentials: true} )
@@ -142,10 +156,32 @@ export const logout = () => async(dispatch) => {
     } catch (error) {
         dispatch(userSlice.actions.logoutFailed())
         toast.error(error.response.data.message)
-        dispatch(userSlice.actions.clearAllErrors)
+        dispatch(userSlice.actions.clearAllErrors())
     }
 }
 
+
+export const fetchUser = () => async(dispatch) => {
+    dispatch(userSlice.actions.fetchUserRequest()) 
+    try {
+        const response = await axios.get(
+
+            "http://localhost:5000/api/users/me", 
+            { 
+                withCredentials: true
+            } 
+        )
+
+        dispatch(userSlice.actions.fetchUserSuccess(response.data.user))
+        dispatch(userSlice.actions.clearAllErrors())
+
+    } catch (error) {
+
+        dispatch(userSlice.actions.fetchUserFailed())
+        dispatch(userSlice.actions.clearAllErrors())
+        console.log(error)
+    }
+}
 
 
 
