@@ -14,6 +14,13 @@ const AuctionItem = () => {
   const dispatch = useDispatch();
   const [amount, setAmount] = useState("");
 
+  const handleBid = () => {
+    const formData = new FormData();
+    formData.append("amount", amount);
+    dispatch(placeBid(id, formData));
+    dispatch(getAuctionDetail(id));
+  };
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigateTo("/");
@@ -63,7 +70,7 @@ const AuctionItem = () => {
           <div className="flex-1 bg-white shadow-2xl rounded-xl overflow-hidden m-4">
             <header className="bg-gray-100 py-5 px-8 text-2xl font-semibold text-gray-800">BIDS</header>
             <div className="bg-white px-8 min-h-fit lg:min-h-[650px]">
-              {auctionBidders &&
+              {auctionBidders && auctionBidders.length > 0 &&
               new Date(auctionDetail.startTime) < Date.now() &&
               new Date(auctionDetail.endTime) > Date.now() ? (
                 auctionBidders.length > 0 ? (
@@ -108,7 +115,9 @@ const AuctionItem = () => {
                       placeholder="Enter amount"
                     />
                   </div>
-                  <button className="p-4 text-white bg-black rounded-full transition-all duration-300 hover:bg-gray-800 text-2xl shadow-lg">
+                  <button className="p-4 text-white bg-black rounded-full transition-all duration-300 hover:bg-gray-800 text-2xl shadow-lg"
+                  onClick={handleBid}
+                  >
                     <RiAuctionFill />
                   </button>
                 </>
