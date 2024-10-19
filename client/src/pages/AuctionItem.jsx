@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Spinner from "@/custom-components/Spinner";
 import { getAuctionDetail } from "@/store/slices/auctionSlice";
+import { placeBid } from "@/store/slices/bidSlice";
 
 const AuctionItem = () => {
   const { id } = useParams();
@@ -12,7 +13,7 @@ const AuctionItem = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
   const navigateTo = useNavigate();
   const dispatch = useDispatch();
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
 
   const handleBid = () => {
     const formData = new FormData();
@@ -77,7 +78,7 @@ const AuctionItem = () => {
                   auctionBidders.map((element, index) => (
                     <div key={index} className="py-5 flex items-center justify-between border-b border-gray-200">
                       <div className="flex items-center gap-4">
-                        <img src={element.profileImage} alt={element.userName} className="w-12 h-12 rounded-full hidden md:block" />
+                        <img src={element.profileImage} alt={element.userName} className="w-14 h-14 rounded-full hidden md:block" />
                         <p className="text-lg font-semibold text-gray-800">{element.userName}</p>
                       </div>
                       {index === 0 ? (
