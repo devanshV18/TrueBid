@@ -79,6 +79,21 @@ const userSlice = createSlice({
             state.user = state.user
         },
 
+        fetchLeaderboardRequest(state, action) {
+            state.loading = true;
+            state.leaderboard = [];
+          },
+
+          fetchLeaderboardSuccess(state, action) {
+            state.loading = false;
+            state.leaderboard = action.payload;
+          },
+
+          fetchLeaderboardFailed(state, action) {
+            state.loading = false;
+            state.leaderboard = [];
+          },
+
         clearAllErrors(state,action){
             state.user = state.user
             state.isAuthenticated = state.isAuthenticated
@@ -182,6 +197,28 @@ export const fetchUser = () => async(dispatch) => {
         console.log(error)
     }
 }
+
+
+
+export const fetchLeaderboard = () => async (dispatch) => {
+    dispatch(userSlice.actions.fetchLeaderboardRequest());
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/users/leaderboard",
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(
+        userSlice.actions.fetchLeaderboardSuccess(response.data.leaderboard)
+      );
+      dispatch(userSlice.actions.clearAllErrors());
+    } catch (error) {
+      dispatch(userSlice.actions.fetchLeaderboardFailed());
+      dispatch(userSlice.actions.clearAllErrors());
+      console.error(error);
+    }
+  };
 
 
 

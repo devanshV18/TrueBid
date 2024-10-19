@@ -8,11 +8,12 @@ import Signup from './pages/Signup';
 import Login from './pages/login';
 import SubmitCommission from './pages/SubmitCommission';
 import { useDispatch } from 'react-redux';
-import { fetchUser } from './store/slices/userSlice';
+import { fetchLeaderboard, fetchUser } from './store/slices/userSlice';
 import { useEffect } from 'react';
 import HowItWorks from './pages/HowItWorks';
 import About from './pages/About';
 import { getAllAuctionItems } from './store/slices/auctionSlice';
+import LeaderboardPage from './pages/LeaderboardPage';
 
 const App = () => {
   const dispatch = useDispatch()
@@ -20,6 +21,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchUser())
     dispatch(getAllAuctionItems())
+    dispatch(fetchLeaderboard())
   }, []);
 
   return (
@@ -33,6 +35,7 @@ const App = () => {
         <Route path='/submit-commission' element = {<SubmitCommission/>}/>
         <Route path='/how-it-works-info' element = {<HowItWorks/>}/>
         <Route path='/about' element = {<About/>}/>
+        <Route path='/leaderboard' element = {<LeaderboardPage/>}/>
       </Routes>
       <ToastContainer position='top-right'/>
     </Router>

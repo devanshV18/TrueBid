@@ -6,7 +6,7 @@ import FeaturedAuctions from "./home-sub-components/FeaturedAuctions";
 import UpcomingAuctions from "./home-sub-components/UpcomingAuctions";
 import Leaderboard from "./home-sub-components/Leaderboard";
 import Spinner from '@/custom-components/Spinner';
-import Card from '@/custom-components/Card';
+// import Card from '@/custom-components/Card';
 // import Spinner from "@/custom-components/Spinner";
 
 const Home = () => {
