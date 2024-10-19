@@ -15,6 +15,7 @@ import About from './pages/About';
 import { getAllAuctionItems } from './store/slices/auctionSlice';
 import LeaderboardPage from './pages/LeaderboardPage';
 import Auctions from './pages/Auctions';
+import AuctionItem from './pages/AuctionItem';
 
 const App = () => {
   const dispatch = useDispatch()
@@ -30,6 +31,7 @@ const App = () => {
       <SideDrawer/>
 
       <Routes>
+
         <Route path='/' element = { <Home/> } />
         <Route path='/sign-up' element = {<Signup/>}/>
         <Route path='/login' element = {<Login/>}/>
@@ -38,6 +40,8 @@ const App = () => {
         <Route path='/about' element = {<About/>}/>
         <Route path='/leaderboard' element = {<LeaderboardPage/>}/>
         <Route path='/auctions' element = {<Auctions/>}/>
+        <Route path='/auction/item/:id' element = {<AuctionItem/>}/>
+        
       </Routes>
       <ToastContainer position='top-right'/>
     </Router>
