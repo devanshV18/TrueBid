@@ -12,12 +12,14 @@ import { fetchUser } from './store/slices/userSlice';
 import { useEffect } from 'react';
 import HowItWorks from './pages/HowItWorks';
 import About from './pages/About';
+import { getAllAuctionItems } from './store/slices/auctionSlice';
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchUser())
+    dispatch(getAllAuctionItems())
   }, []);
 
   return (

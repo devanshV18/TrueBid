@@ -44,14 +44,14 @@ const auctionSlice = createSlice({
 
 
 
-export const getAllAuctions = () => async(dispatch) => {
+export const getAllAuctionItems = () => async(dispatch) => {
 
     dispatch(auctionSlice.actions.getAllAuctionItemRequest())
 
     try {
 
         const response = await axios.get(
-            "",
+            "http://localhost:5000/api/auctionitem/allitems",
             {
                 withCredentials: true
             }

@@ -31,7 +31,7 @@ const Home = () => {
       <section className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] gap-7 flex flex-col min-h-screen py-4 justify-center">
         <div>
             <p className="text-stone-400 font-bold text-2xl mb-8">
-              Transparenct and Legitimate Auctions.
+              Transparent and Legitimate Auctions.
             </p>
             <h1
               className={`text-[#111] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
@@ -78,8 +78,8 @@ const Home = () => {
                       <div key={element.title}
                           className='bg-white flex flex-col gap-2 p-2 rounded-md h-[96px] justify-center md:w-[48%] lg:w-[47%] 2xl:w-[24%] shadow-xl transition-all duration-300'
                       >
-                        <h5 className='font-bold'>{element.title}</h5>
-                        <p>{element.description}</p>
+                        <h5 className='font-bold  text-xl'>{element.title}</h5>
+                        <p className='text-gray-600 font-semibold'>{element.description}</p>
                       </div>
                     )
                   })
@@ -89,7 +89,7 @@ const Home = () => {
         <FeaturedAuctions/>
         <UpcomingAuctions/>
         <Leaderboard/>
-        <Card/>
+        {/* <Card/> */}
         {/* <Spinner/> */}
       </section>
     </>

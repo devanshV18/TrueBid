@@ -45,65 +45,46 @@ const Card = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
 
   return (
   <>
-    <div className="bg-white transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-black max-w-sm h-100 border border-gray-300 rounded-md">
-
-        <Link
-          to={`/auction/item/${id}`}
-          className="flex-grow basis-full bg-white rounded-xl group sm:basis-56 lg:basis-64 2xl:basis-72 h-full"
-        >
-              <img
-                src={imgSrc}
-                alt={title}
-                className="w-full aspect-[4/3] m-auto md:p-10 transform transition-transform duration-300 ease-in-out group-hover:scale-110"
-              />
-
-
-            <div className="px-2 pt-4 pb-2">
-
-                <h5 className="font-semibold text-xl group-hover:text-black mb-2 p-2">
-                  {title} hello
-                </h5>
-
-
-                {startingBid && (
-                  <p className="text-stone-600 font-light">
-s
-                    Starting Bid:{" "}
-
-                    <span className="text-[#72a24d] font-bold ml-1">
-                      {startingBid}
-                    </span>
-
-                  </p>
-                )}
-
-
-                <p className="text-stone-600 font-light mb-6">
-
-                  {timeLeft.type}
-
-                  {  Object.keys(timeLeft).length > 1 ? 
-                      (
-
-                        <span className="text-black font-bold ml-1">
-                          {formatTimeLeft(timeLeft)}
-                        </span>
-
-                      ) 
-                      : 
-                      (
-                        <span className="text-[#72a24d] text-xl font-bold mb-2">Time's up!</span>
-                      )
-                  }
-
-                </p>
-
-            </div>
-
-        </Link>
+    <div className="bg-white transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-sm hover:shadow-gray-500 max-w-md w-72 h-96 border border-gray-300 rounded-md">
+  <Link
+    to={`/auction/item/${id}`}
+    className="flex flex-col h-full w-full bg-white rounded-xl group"
+  >
+    <div className="w-full h-48 overflow-hidden border border-gray-300 hover:border-gray-400 rounded-xl hover:border">
+      <img
+        src={imgSrc}
+        alt={title}
+        className="w-full h-full object-cover transform transition-transform duration-300 ease-in-out group-hover:scale-110"
+      />
     </div>
 
+    <div className="px-2 pt-4 pb-2 flex-grow">
+      <h5 className="font-semibold text-xl group-hover:text-black mb-2 p-2">
+        {title}
+      </h5>
 
+      {startingBid && (
+        <p className="text-stone-500 font-semibold text-md">
+          Starting Bid:{" "}
+          <span className="text-black font-bold ml-1">
+            ₹ {startingBid}
+          </span>
+        </p>
+      )}
+
+      <p className="text-stone-600 font-light mb-6">
+        {timeLeft.type}
+        {Object.keys(timeLeft).length > 1 ? (
+          <span className="text-black font-bold ml-1">
+            {formatTimeLeft(timeLeft)}
+          </span>
+        ) : (
+          <span className="text-[#72a24d] text-xl font-bold mb-2">Time's up!</span>
+        )}
+      </p>
+    </div>
+  </Link>
+</div>
 
 
     </>
