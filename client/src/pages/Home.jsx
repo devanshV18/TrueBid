@@ -12,14 +12,14 @@ import Card from '@/custom-components/Card';
 const Home = () => {
 
   const howItWorks = [
-    { title: "Post Items", description: "Auctioneer posts items for bidding." },
-    { title: "Place Bids", description: "Bidders place bids on listed items." },
+    { title: "Post Items ⬆️", description: "Auctioneer posts items for bidding." },
+    { title: "Place Bids 💵", description: "Bidders place bids on listed items." },
     {
-      title: "Win Notification",
+      title: "Win Notification 🎯",
       description: "Highest bidder receives a winning email.",
     },
     {
-      title: "Payment & Fees",
+      title: "Payment & Fees 💳",
       description: "Bidder pays; auctioneer pays 5% fee.",
     },
   ];
@@ -69,9 +69,9 @@ const Home = () => {
 
         <div className='flex flex-col gap-6'>
 
-            <h3 className='text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl'>How it works</h3>
+            <h3 className='text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl'>How it works ⚙️</h3>
 
-            <div className='flex flex-col gap-4 md:flex-row md:flex-wrap w-full'>
+            <div className='flex flex-col gap-4 md:flex-row md:flex-wrap w-full cursor-pointer'>
                 {
                   howItWorks.map(element => {
                     return (
