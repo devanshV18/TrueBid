@@ -69,7 +69,7 @@ const Home = () => {
 
         <div className='flex flex-col gap-6'>
 
-            <h2 className='text-black font-semibold md:text-3xl text-xl'>How it works</h2>
+            <h3 className='text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl'>How it works</h3>
 
             <div className='flex flex-col gap-4 md:flex-row md:flex-wrap w-full'>
                 {
