@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { data } from "autoprefixer";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -16,6 +17,17 @@ const auctionSlice = createSlice({
     },
 
     reducers: {
+        createAuctionRequest(state,action){
+            state.loading = true
+        },
+
+        createAuctionSuccess(state,action){
+            state.loading = false
+        },
+
+        createAuctionFailed(state,action){
+            state.loading = false
+        },
         
         getAllAuctionItemRequest(state,action){
             state.loading = true
@@ -106,5 +118,30 @@ export const getAuctionDetail = (id) => async (dispatch) => {
       dispatch(auctionSlice.actions.resetSlice());
     }
   };
+
+
+
+  export const createAuction = (data) => async (dispatch) => {
+    dispatch(auctionSlice.actions.createAuctionRequest())
+
+    try {
+        const response = await axios.post(
+            "http://localhost:5000/api/auctionitem/create",
+            data, 
+            {
+                withCredentials: true,
+                headers: {"Content-Type": "multipart/form-data"},
+            }
+        )
+
+        dispatch(auctionSlice.actions.createAuctionSuccess())
+        toast.success(response.data.message)
+        dispatch(auctionSlice.actions.resetSlice())
+    } catch (error) {
+        dispatch(auctionSlice.actions.createAuctionFailed())
+        toast.error(error.response.data.message)
+        
+    }
+  }
 
 export default auctionSlice.reducer
