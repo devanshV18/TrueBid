@@ -87,7 +87,7 @@ const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
 
         <div className="flex flex-col gap-4 mt-4 items-center mb-4">
           <Link
-            to={`/auction/detials/${id}`}
+            to={`/auction/details/${id}`}
             className="bg-black text-white text-lg px-6 py-3 rounded-md transition-all duration-300 hover:bg-[#72a24d]"
           >
             View Auction
