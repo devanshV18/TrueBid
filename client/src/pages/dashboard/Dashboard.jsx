@@ -6,6 +6,7 @@ import BiddersAuctioneersGraph from './sub-components/BiddersAuctioneersGraph'
 import PaymentGraph from './sub-components/PaymentGraph'
 import PaymentProofs from './sub-components/PaymentProofs'
 import Spinner from '@/custom-components/Spinner'
+import { useNavigate } from 'react-router-dom'
 
 const Dashboard = () => {
 
@@ -19,6 +20,16 @@ const Dashboard = () => {
         dispatch(getAllPaymentProofs())
         dispatch(clearAlladminSliceErrors())
     }, [])
+
+    const {user, isAuthenticated} = useSelector(state => state.user)
+    const navigateTo = useNavigate()
+
+    
+    useEffect(() => {
+      if(user.role !== "Admin"){
+        navigateTo("/")
+      }
+    }, [isAuthenticated])
 
   return (
     <>
