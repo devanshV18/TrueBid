@@ -198,7 +198,6 @@ export const getAuctionDetail = (id) => async (dispatch) => {
             }
         )
 
-        console.log("My item", response)
 
         dispatch(auctionSlice.actions.getMyAuctionsSuccess(response.data.userAuctionItems))
         dispatch(auctionSlice.actions.resetSlice())

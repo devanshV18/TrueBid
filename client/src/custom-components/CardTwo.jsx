@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { deleteAuctionItem, republishAuction } from "@/store/slices/auctionSlice";
@@ -123,7 +123,7 @@ export default CardTwo;
 
 const Drawer = ( { setOpenDrawer, openDrawer, id } ) => {
   const dispatch = useDispatch()
-
+  const {loading} = useSelector(state => state.auction)
   const [startTime , setStartTime] = useState("")
   const [ endTime, setEndTime ] = useState("")
 
@@ -186,7 +186,9 @@ const Drawer = ( { setOpenDrawer, openDrawer, id } ) => {
                 <button type="button" className="bg-blue-500 flex justify-center w-full py-2 rounded-md text-white font-semibold text-xl transition-all duration-300 hover:bg-blue-700"
                 onClick={handleRepublishItem}
                 >
-                  Republish Item
+                  {
+                    loading ? <Spinner/> : "Repuplish Item"
+                  }
                 </button>
             </div>
 
