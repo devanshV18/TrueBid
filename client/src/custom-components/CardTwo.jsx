@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker";
 
 
 const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
@@ -102,16 +103,98 @@ const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
           <button
             disabled={new Date(endTime) > Date.now()}
             onClick={() => setOpenDrawer(true)}
-            className="bg-blue-300 text-white text-lg px-6 py-3 rounded-md transition-all duration-300 hover:bg-blue-600"
+            className="bg-blue-300 text-white text-lg px-6 py-3 rounded-md transition-all duration-300 hover:bg-blue-600 cursor-pointer"
           >
             Republish Auction
           </button>
         </div>
       </div>
     </div>
+
+    <Drawer id={id} openDrawer={openDrawer} setOpenDrawer={setOpenDrawer}/>
   </>
 
   );
 };
 
 export default CardTwo;
+
+const Drawer = ( { setOpenDrawer, openDrawer, id } ) => {
+  const dispatch = useDispatch()
+
+  const [startTime , setStartTime] = useState("")
+  const [ endTime, setEndTime ] = useState("")
+
+  const handleRepublishItem = () => {
+
+  }
+
+  return (
+    <section className={`fixed ${openDrawer && id ? "bottom-0" : "-bottom-full"} left-0 w-full transition-all duration-300 h-full bg-[#00000087] flex items-end`}>
+
+      <div className="bg-white h-fit transition-all duration-300 w-full">
+
+        <div className="w-full px-5 py-8 sm:max-w-[640px] sm:m-auto">
+
+          <h3 className="text-[#72a24D] text-3xl font-bold text-center mb-1">
+            Republish Auction
+          </h3>
+
+          <p className="text-lg font-semibold text-center">
+            You can Republish this item with a new start and end Time!
+          </p>
+
+
+          <form className="flex flex-col gap-5 mt-8">
+            <div className="flex flex-col gap-3">
+              
+                <label className="block text-base font-medium text-gray-700 mb-1 font-semibold">Start Time</label>
+                <DatePicker
+                  selected={startTime}
+                  onChange={(date) => setStartTime(date)}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat={"MMMM d, yyyy h:mm aa"}
+                  className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-[#72a24d] focus:ring focus:ring-[#72a24d] focus:ring-opacity-50 px-3 py-2 cursor-pointer"
+                />
+
+            </div>
+
+            <div className="flex flex-col gap-3">
+              
+                <label className="block text-base font-medium text-gray-700 mb-1 font-semibold">End Time</label>
+                <DatePicker
+                  selected={endTime}
+                  onChange={(date) => setEndTime(date)}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat={"MMMM d, yyyy h:mm aa"}
+                  className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-[#72a24d] focus:ring focus:ring-[#72a24d] focus:ring-opacity-50 px-3 py-2 cursor-pointer"
+                />
+
+            </div>
+
+            <div>
+                <button type="button" className="bg-blue-500 flex justify-center w-full py-2 rounded-md text-white font-semibold text-xl transition-all duration-300 hover:bg-blue-700"
+                
+                >
+                  Republish Item
+                </button>
+            </div>
+
+            <div>
+                <button type="button" className="bg-red-600 flex justify-center w-full py-2 rounded-md text-white font-semibold text-xl transition-all duration-300 hover:bg-red-700"
+                onClick={() => setOpenDrawer(false)}
+                >
+                  Cancel
+                </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+  )
+}
