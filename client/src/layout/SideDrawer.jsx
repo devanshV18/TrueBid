@@ -39,7 +39,7 @@ const SideDrawer = () => {
         </div>
   
         <div
-          className={`w-[100%] sm:w-[300px] bg-black h-full fixed top-0 ${
+          className={`w-[100%] sm:w-[300px] bg-[#222222] h-full fixed top-0 ${
             show ? "left-0" : "left-[-100%]"
           } transition-all duration-100 p-4 flex flex-col justify-between lg:left-0 border-r-[1px] border-r-stone-500 overflow-y-auto`}  // Added overflow-y-auto here
           style={{ maxHeight: '100vh' }} // Added max-height to limit the side drawer height
