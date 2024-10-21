@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import CardTwo from '@/custom-components/CardTwo'
 import Spinner from '@/custom-components/Spinner'
+import nothingIllustration from "../assets/nothingIllustration.png"
 
 
 const ViewMyAuctions = () => {
@@ -48,9 +49,12 @@ const ViewMyAuctions = () => {
                 );
               })
             ) : (
-              <h3 className="text-[#666] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl mt-5">
-                You have not posted any auction.
-              </h3>
+              <div className="flex justify-center items-center text-[#666] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl mt-5">
+                You have not posted any auction 🪹.
+                <img
+                    src={nothingIllustration}
+                />
+              </div>
             )}{" "}
             :
           </div>

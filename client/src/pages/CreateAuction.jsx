@@ -65,6 +65,13 @@ const CreateAuction = () => {
     formData.append("startTime", startTime);
     formData.append("endTime", endTime);
     dispatch(createAuction(formData));
+    setImagePreview("")
+    setCategory("")
+    setCondition("")
+    setStartTime("")
+    setEndTime("")
+    setStartingBid("")
+    setImage("")
   };
 
   const handleRemoveImage = () => {
@@ -194,7 +201,7 @@ const CreateAuction = () => {
               type="submit"
               className="w-1/3 bg-black text-white py-2 px-4 rounded-md hover:bg-[#5c8a3d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#72a24d] text-base font-medium"
             >
-              {loading ? <Spinner/> : "Post Auction"}
+              {loading ? "Posting Auction..." : "Post Auction"}
             </button>
           </div>
         </form>
