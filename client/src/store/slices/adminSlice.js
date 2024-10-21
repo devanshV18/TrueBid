@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { getAllAuctionItems } from "./auctionSlice";
 
 
 const adminSlice = createSlice({
@@ -185,11 +186,11 @@ export const getAllUsers = () => async (dispatch) => {
     }
   };
   
-  export const deletePaymentProof = (id) => async (dispatch) => {
+ export const deletePaymentProof = (id) => async (dispatch) => {
     dispatch(adminSlice.actions.requestForDeletePaymentProof());
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/v1/admin/paymentproof/delete/${id}`,
+        `http://localhost:5000/api/admin/paymentproof/delete/${id}`,
         { withCredentials: true }
       );
       dispatch(adminSlice.actions.successForDeletePaymentProof());
@@ -206,7 +207,7 @@ export const getAllUsers = () => async (dispatch) => {
     dispatch(adminSlice.actions.requestForSinglePaymentProofDetail());
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/admin/paymentproof/${id}`,
+        `http://localhost:5000/api/admin/paymentproof/${id}`,
         { withCredentials: true }
       );
       dispatch(
@@ -224,7 +225,7 @@ export const getAllUsers = () => async (dispatch) => {
     dispatch(adminSlice.actions.requestForUpdatePaymentProof());
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/v1/admin/paymentproof/status/update/${id}`,
+        `http://localhost:5000/api/admin/paymentproof/status/update/${id}`,
         { status, amount },
         { withCredentials: true, headers: { "Content-Type": "application/json" } }
       );
@@ -243,7 +244,7 @@ export const getAllUsers = () => async (dispatch) => {
     dispatch(adminSlice.actions.requestForAuctionItemDelete());
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/v1/admin/auctionitem/delete/${id}`,
+        `http://localhost:5000/api/admin/auctionitem/delete/${id}`,
         { withCredentials: true }
       );
       dispatch(adminSlice.actions.successForAuctionItemDelete());
