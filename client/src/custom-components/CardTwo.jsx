@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import { deleteAuctionItem, republishAuction } from "@/store/slices/auctionSlice";
 
 
 const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
@@ -48,8 +49,9 @@ const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
 
 
   const dispatch = useDispatch()
-  const handleDeleteAuction = () => {
 
+  const handleDeleteAuction = () => {
+    dispatch(deleteAuctionItem(id))
   }
 
   const [openDrawer, setOpenDrawer] = useState(false)
@@ -126,7 +128,11 @@ const Drawer = ( { setOpenDrawer, openDrawer, id } ) => {
   const [ endTime, setEndTime ] = useState("")
 
   const handleRepublishItem = () => {
+    const formData = new FormData();
 
+    formData.append("startTime", startTime)
+    formData.append("endTime", endTime)
+    dispatch(republishAuction(id, formData))
   }
 
   return (
@@ -178,7 +184,7 @@ const Drawer = ( { setOpenDrawer, openDrawer, id } ) => {
 
             <div>
                 <button type="button" className="bg-blue-500 flex justify-center w-full py-2 rounded-md text-white font-semibold text-xl transition-all duration-300 hover:bg-blue-700"
-                
+                onClick={handleRepublishItem}
                 >
                   Republish Item
                 </button>
