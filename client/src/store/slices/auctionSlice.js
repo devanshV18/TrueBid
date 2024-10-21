@@ -175,6 +175,7 @@ export const getAuctionDetail = (id) => async (dispatch) => {
 
         dispatch(auctionSlice.actions.createAuctionSuccess())
         toast.success(response.data.message)
+        dispatch(getAllAuctionItems())
         dispatch(auctionSlice.actions.resetSlice())
     } catch (error) {
         dispatch(auctionSlice.actions.createAuctionFailed())
