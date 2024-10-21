@@ -72,6 +72,31 @@ const auctionSlice = createSlice({
             state.myAuctions = []
         },
 
+        deleteAuctionItemRequest(state, action){
+            state.loading = true
+        },
+
+        deleteAuctionItemSuccess(state, action){
+            state.loading = false
+        },
+
+        deleteAuctionItemFailed(state, action){
+            state.loading = false
+        },
+
+        republishItemRequest(state,action){
+            state.loading = true
+        },
+
+        republishItemSuccess(state,action){
+            state.loading = false
+
+        },
+
+        republishItemFailed(state,action){
+            state.loading = false
+        },
+
 
         resetSlice(state, action){
             state.loading = false
@@ -188,5 +213,59 @@ export const getAuctionDetail = (id) => async (dispatch) => {
 
     }
 }
+
+
+
+export const republishAuction = (id,data) => async(dispatch) => {
+    dispatch(auctionSlice.actions.republishItemRequest())
+
+    try {
+        const response = await axios.put(
+        `http://localhost:5000/api/auctionitem/item/republish/${id}`, 
+        data, 
+        {
+            withCredentials: true,
+            headers: {"Content-Type": "application/json" } 
+        }
+    )
+
+    dispatch(auctionSlice.actions.republishItemSuccess())
+    toast.success(response.data.message)
+    dispatch(getMyAuctionItems()) // changes to my auction items also
+    dispatch(getAllAuctionItems()) // changes all auction item req as well
+    dispatch(auctionSlice.actions.resetSlice())
+    } catch (error) {
+        dispatch(auctionSlice.actions.republishItemFailed())
+        toast.error(error.response.data.message)
+        console.log(error)
+        dispatch(auctionSlice.actions.resetSlice())
+    }
+}
+
+
+export const deleteAuctionItem = (id) => async(dispatch) => {
+    dispatch(auctionSlice.actions.deleteAuctionItemRequest())
+
+    try {
+        const response = await axios.delete(
+        `http://localhost:5000/api/auctionitem/delete/${id}`, 
+        {
+            withCredentials: true
+        }
+    )
+
+    dispatch(auctionSlice.actions.deleteAuctionItemSuccess())
+    toast.success(response.data.message)
+    dispatch(getMyAuctionItems())
+    dispatch(getAllAuctionItems())
+
+    } catch (error) {
+        dispatch(auctionSlice.actions.deleteAuctionItemFailed())
+        toast.error(error.response.data.message)
+        console.log(error)
+        dispatch(auctionSlice.actions.resetSlice())
+    }
+}
+
 
 export default auctionSlice.reducer
