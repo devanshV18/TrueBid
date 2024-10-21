@@ -49,7 +49,7 @@ export const placeBid = (id, data) => async( dispatch ) => {
         dispatch(bidSlice.actions.bidSuccess());
 
         toast.success(response.data.message)
-        dispatch(getAuctionDetail())
+        dispatch(getAuctionDetail(id))
     } catch (error) {
         
         dispatch(bidSlice.actions.bidFailed())
