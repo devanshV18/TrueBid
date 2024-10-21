@@ -35,10 +35,10 @@ const CreateAuction = () => {
   const navigateTo = useNavigate();
 
   const { loading } = useSelector(state => state.auction);
-  const { isAuthenticated } = useSelector(state => state.user);
+  const { isAuthenticated, user } = useSelector(state => state.user);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated || user.role !== "Auctioneer") {
       navigateTo("/");
     }
   }, [isAuthenticated, navigateTo]);
@@ -133,7 +133,7 @@ const CreateAuction = () => {
                   showTimeSelect
                   timeFormat="HH:mm"
                   timeIntervals={15}
-                  dateFormat="MMMM d, yyyy h:mm aa"
+                  dateFormat={"MMMM d, yyyy h:mm aa"}
                   className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-[#72a24d] focus:ring focus:ring-[#72a24d] focus:ring-opacity-50 px-3 py-2 cursor-pointer"
                 />
               </div>
@@ -145,7 +145,7 @@ const CreateAuction = () => {
                   showTimeSelect
                   timeFormat="HH:mm"
                   timeIntervals={15}
-                  dateFormat="MMMM d, yyyy h:mm aa"
+                  dateFormat={"MMMM d, yyyy h:mm aa"}
                   className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-[#72a24d] focus:ring focus:ring-[#72a24d] focus:ring-opacity-50 px-3 py-2 cursor-pointer"
                 />
               </div>
@@ -194,7 +194,7 @@ const CreateAuction = () => {
               type="submit"
               className="w-1/3 bg-black text-white py-2 px-4 rounded-md hover:bg-[#5c8a3d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#72a24d] text-base font-medium"
             >
-              {loading ? <Spinner/> : "Create Auction"}
+              {loading ? <Spinner/> : "Post Auction"}
             </button>
           </div>
         </form>
