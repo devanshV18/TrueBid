@@ -161,6 +161,22 @@ const SideDrawer = () => {
             <hr className="mb-8 text-white" />
   
             <ul className="flex flex-col gap-3">
+
+              {
+                isAuthenticated && (
+                  <li className="w-full mt-3">
+                <div className="hover-container">
+                  <Link
+                    to={"/me"}
+                    className="flex justify-center text-xl font-semibold gap-2 items-center text-white hover-effect"
+                  >
+                    <FaUserCircle /> Profile
+                  </Link>
+                </div>
+              </li>
+                )
+              }
+
               <li className="w-full mt-3">
                 <div className="hover-container">
                   <Link
