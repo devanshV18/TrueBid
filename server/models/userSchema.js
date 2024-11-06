@@ -75,7 +75,7 @@ userSchema.pre("save", async function (next) {
 })
 
 userSchema.methods.comparePassword = async function(enteredPassword){
-    return await bcrypt.compare(enteredPassword, this.password)
+    return await bcrypt.compare(enteredPassword, this.password) //returns true if entered password and hashed passwrd matvh else false
 }
 
 userSchema.methods.generateJsonWebToken = function(){

@@ -41,6 +41,7 @@ export const addNewAuctionItem = catchAsyncErrors(async(req,res,next) => {
         }
 
         //to check if user has already active auctions 
+        //took two args -> one to check if any auction exist with current user (req.user._id) accessed using token (middleware) and second check checks if the end time is not yet reached
         const alreadyAuctionActive = await Auction.find({
             createdBy: req.user._id,
             endTime: { $gt: Date.now() }
@@ -75,6 +76,7 @@ export const addNewAuctionItem = catchAsyncErrors(async(req,res,next) => {
                 },
                 createdBy: req.user._id
             })
+            
             return res.status(201).json({
                 success: true,
                 message: `Auction item created and will be listed at ${startTime}`,

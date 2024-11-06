@@ -70,6 +70,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
                 },
             },
         });
+        
         generateToken(user, "User Registered", 201, res)
 });
 

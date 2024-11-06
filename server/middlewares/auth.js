@@ -15,11 +15,8 @@ export const isAuthenticated = catchAsyncErrors(async(req,res,next) => {
     
     //vvvii explanation
 
-    //this line verifies that the generated token in generated from the passed secret key only
-    //this is done as user might login to multiple websites but to verify the token of our website we match it with the our website secret key
 
-    //how decoded has access of id (decoded.id) -> when we defined generateJsonWebToken funnction in userSchema we returned the token as jwt.sign({ id: this._id }, ....) -> the payload id stores this._id which means id of the logged in user.
-
+    //the below line verifies the token is generated froim our key only, and also decodes the sent token to retrieve the information passed in it while wr created this token usign jwt.sign method (in our case we sent a paylaod id: this._id) which means id contained the the id of the user for which token was generated, so we get the access of the id of the user to which the token belongs to and thus we set req.user  = user of the id decoded carries.
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
     
 
