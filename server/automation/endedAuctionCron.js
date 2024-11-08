@@ -30,7 +30,7 @@ export const endedAuctionCron = () => {
 
         const auctioneer = await User.findById(auction.createdBy);
 
-        // auctioneer.unpaidCommision = commissionAmount;
+        auctioneer.unpaidCommision = commissionAmount;
 
         if (highestBidder) {
 
