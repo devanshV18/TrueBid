@@ -14,6 +14,7 @@ import { endedAuctionCron } from "./automation/endedAuctionCron.js";
 import { verifyCommissioCron } from "./automation/verifyCommissionCron.js"
 
 const app = express();
+
 config({
     path : "./config/config.env"
 })
